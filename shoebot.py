@@ -5,6 +5,7 @@ import csv
 import re
 import urllib3
 import requests
+from selenium import webdriver
 
 # Fake Headers: headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
@@ -20,12 +21,16 @@ def urlgen(model, size):
     return url
 
 def CheckStock(url):
-    hdr = {'User-Agent': 'Mozilla/5.0'}
-    req = requests.get(url, headers=hdr)
-    page = bs4.BeautifulSoup(req.text, "lxml")
+    # These methods DO NOT work if desired elements are rendered with JavaScipt
+    # hdr = {'User-Agent': 'Mozilla/5.0'}
+    # req = requests.get(url, headers=hdr)\
+    driver = webdriver.Chrome('C:/Users/dpmei/Documents/GitHub/sneaker-bot/chromedriver')
+    driver.get(url)
+    req = driver.page_source
+    page = bs4.BeautifulSoup(req, "html.parser")
     title = page.title.string
     print(title)
-    ListOfSizesRaw = page.find_all("")
+    ListOfSizesRaw = page.find_all("select", attrs={"aria-label":"Select Size"})
     print(ListOfSizesRaw)
 
 def Main(model, size):
