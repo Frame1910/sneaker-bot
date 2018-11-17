@@ -30,8 +30,19 @@ def CheckStock(url):
     page = bs4.BeautifulSoup(req, "html.parser")
     title = page.title.string
     print(title)
-    ListOfSizesRaw = page.find_all("select", attrs={"aria-label":"Select Size"})
-    print(ListOfSizesRaw)
+    SizeSelectorRaw = page.find("select", attrs={"aria-label": "Select size"})
+    SizeSelectorRaw = SizeSelectorRaw.find_all("option")
+    ArrayOfSizes = []
+    i = 0
+    while i < len(SizeSelectorRaw):
+        Text = SizeSelectorRaw[i].get_text()
+        print(Text)
+        ArrayOfSizes.append(Text)
+        i += 1
+    ArrayOfSizes.remove("")
+    print("Sizes Available:")
+    print(ArrayOfSizes)
+
 
 def Main(model, size):
     URL = urlgen(model, size)
