@@ -3,7 +3,7 @@ import bs4
 import webbrowser
 import csv
 import re
-import urllib3
+#import urllib3
 import requests
 from selenium import webdriver
 
