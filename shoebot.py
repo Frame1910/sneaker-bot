@@ -8,6 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 
 # Fake Headers: headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
@@ -51,25 +52,64 @@ def selectQuantity(url, no):
     quantityDrop.click()
     num = str(no)
     quantitySelect = driver.find_element_by_css_selector(dropdownSelector + selectionSelectorAddon + "(" + num + ")")
+    print("Selecting quantity...")
     quantitySelect.click()
 
 
-def submit():
-    element = driver.find_element_by_css_selector('#app > div > div:nth-child(1) > div.empty_pdp_space_reserver___IFQzq > div > div.hero___2YuNz > div.container.hero_container___nM-YT > div.order_information___z33d1.col-s-12.col-l-8.col-hg-7 > div > div > form > div.row.no-gutters.add_to_bag_container___16ts0 > button')
-    element.click()
+def addToCart():
     try:
-        element = WebDriverWait(driver, 5).until(EC.presence_of_element_located(By.CSS_SELECTOR, "#modal-root > div.gl-modal.gl-modal--regular.gl-modal--mobile-full.gl-modal--active.glass-modal___1JNyq > div.gl-modal__dialog.no-gutters.col-l-12 > div > div > div > div.row.no-gutters.gl-hidden-s-m.undefined > div.col-l-12 > div > a.gl-cta.gl-cta--primary.gl-cta--full-width.gl-vspacing-s"))
+        waitele = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '#app > div > div:nth-child(1) > div.empty_pdp_space_reserver___IFQzq > div > div.hero___2YuNz > div.container.hero_container___nM-YT > div.order_information___z33d1.col-s-12.col-l-8.col-hg-7 > div > div > form > div.row.no-gutters.add_to_bag_container___16ts0 > button')))
+    finally:
+        addToCart = driver.find_element_by_css_selector('#app > div > div:nth-child(1) > div.empty_pdp_space_reserver___IFQzq > div > div.hero___2YuNz > div.container.hero_container___nM-YT > div.order_information___z33d1.col-s-12.col-l-8.col-hg-7 > div > div > form > div.row.no-gutters.add_to_bag_container___16ts0 > button')
+        addToCart.click()
+        print("Adding to Cart...")
+    print("Successful!")
+    try:
+        print("Waiting for element to appear...")
+        waitele = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#modal-root > div.gl-modal.gl-modal--regular.gl-modal--mobile-full.gl-modal--active.glass-modal___1JNyq > div.gl-modal__dialog.no-gutters.col-l-12 > div > div > div > div.row.no-gutters.gl-hidden-s-m.undefined > div.col-l-12 > div > a.gl-cta.gl-cta--primary.gl-cta--full-width.gl-vspacing-s")))
     finally:
         viewbag = driver.find_element_by_css_selector("#modal-root > div.gl-modal.gl-modal--regular.gl-modal--mobile-full.gl-modal--active.glass-modal___1JNyq > div.gl-modal__dialog.no-gutters.col-l-12 > div > div > div > div.row.no-gutters.gl-hidden-s-m.undefined > div.col-l-12 > div > a.gl-cta.gl-cta--primary.gl-cta--full-width.gl-vspacing-s")
+        print("Element found! Clicking...")
         viewbag.click()
 
+
+def paypal():
+    checkoutPaypal = driver.find_element_by_css_selector("#content > div.cart-wrapper.row > div.container.clearfix > div.cart-right.col-4.co-delivery-right.vertical-callout-container.rbk-mobile-shadow-block > div.mobile-cart-summary.rbk-mobile-shadow-block.clear.clearfix > div > div.co-actions.cart-bottom-actions > a > button")
+    checkoutPaypal.click()
+
+def card():
+    checkoutCard = driver.find_element_by_css_selector("")
+
+def payment(method):
+    if method == "paypal":
+        print("Wise choice :)")
+        paypal()
+    if method == "card":
+        card()
 
 def Main(model, size, quantity):
     URL = urlgen(model, size)
     driver.get(URL)
+    print("Loading page...")
     #CheckStock(URL)
     selectQuantity(URL, quantity)
-    submit()
+    addToCart()
+    method = input("Payment Method? ")
+    payment(method)
+    print("End of script. Closing Driver...")
+    driver.quit()
 
-driver = webdriver.Chrome('C:/Users/dpmei/Documents/GitHub/sneaker-bot/chromedriver')
-Main('AQ0943', 8, 2)
+
+chrome_options = Options()
+chrome_options.add_argument("--window-size=1920,1080")
+driver = webdriver.Chrome(chrome_options=chrome_options, executable_path='C:/Users/dpmei/Documents/GitHub/sneaker-bot/chromedriver')
+
+productCode = input("Input Product Code: ")
+Size = input("Input Size of Shoe: ")
+Amount = input("Input quantity of pairs: ")
+
+try:
+    Main(productCode, Size, Amount)
+except:
+    print("Error occurred, closing Driver.")
+    driver.quit()
