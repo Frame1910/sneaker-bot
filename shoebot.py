@@ -9,6 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
+import urllib3
 
 # Fake Headers: headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
@@ -55,8 +56,28 @@ def selectQuantity(url, no):
     print("Selecting quantity...")
     quantitySelect.click()
 
+def downloadFile(downloadLink):
+    r = requests.get(downloadLink)
+    open('audio.mp3', 'wb').write(r.content)
+
+
+def recaptcha():
+    try:
+        waitele = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#g-recaptcha > div > div > iframe")))
+    finally:
+        captchaButton = driver.find_element_by_css_selector("#g-recaptcha > div > div > iframe")
+        captchaButton.click()
+    driver.implicitly_wait(3)
+    driver.switch_to.frame(driver.find_element_by_css_selector("#g-recaptcha > div > div > iframe"))
+    audioButton = driver.find_element_by_id("recaptcha-audio-button")
+    audioButton.click()
+    url = driver.current_url()
+    downloadFile(url)
+
+
 
 def addToCart():
+    recaptcha()
     try:
         waitele = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '#app > div > div:nth-child(1) > div.empty_pdp_space_reserver___IFQzq > div > div.hero___2YuNz > div.container.hero_container___nM-YT > div.order_information___z33d1.col-s-12.col-l-8.col-hg-7 > div > div > form > div.row.no-gutters.add_to_bag_container___16ts0 > button')))
     finally:
