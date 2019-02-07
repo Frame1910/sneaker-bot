@@ -1,15 +1,12 @@
-import random
 import bs4
 import webbrowser
-import csv
-import re
 import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
-import urllib3
+from download import download
 
 # Fake Headers: headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
@@ -56,21 +53,28 @@ def selectQuantity(url, no):
     print("Selecting quantity...")
     quantitySelect.click()
 
-def downloadFile(downloadLink):
-    r = requests.get(downloadLink)
-    open('audio.mp3', 'wb').write(r.content)
+def findIframe():
+    driver.switch_to.frame(3)
 
 
 def recaptcha():
+    # Click on checkbox to initate challenge
     try:
         waitele = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#g-recaptcha > div > div > iframe")))
     finally:
         captchaButton = driver.find_element_by_css_selector("#g-recaptcha > div > div > iframe")
         captchaButton.click()
-    driver.implicitly_wait(3)
-    driver.switch_to.frame(driver.find_element_by_css_selector("#g-recaptcha > div > div > iframe"))
-    audioButton = driver.find_element_by_id("recaptcha-audio-button")
-    audioButton.click()
+    # Switch to challange iframe
+    print("Scrolling...")
+    driver.execute_script("window.scrollTo(0, 270)")
+    findIframe()
+    try:
+        print("Searching for audio button...")
+        waitele = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='recaptcha-audio-button']")))
+    finally:
+        print("Found! Clicking...")
+        audioChallenge = driver.find_element_by_class_name("rc-button-audio")
+        audioChallenge.click()
     url = driver.current_url()
     downloadFile(url)
 
@@ -125,12 +129,12 @@ chrome_options = Options()
 chrome_options.add_argument("--window-size=1920,1080")
 driver = webdriver.Chrome(chrome_options=chrome_options, executable_path='C:/Users/dpmei/Documents/GitHub/sneaker-bot/chromedriver')
 
-productCode = input("Input Product Code: ")
-Size = input("Input Size of Shoe: ")
-Amount = input("Input quantity of pairs: ")
+productCode = "G27805"  #input("Input Product Code: ")
+Size = 8  #input("Input Size of Shoe: ")
+Amount = 1  #input("Input quantity of pairs: ")
 
-try:
-    Main(productCode, Size, Amount)
-except:
-    print("Error occurred, closing Driver.")
-    driver.quit()
+#try:
+Main(productCode, Size, Amount)
+#except:
+    #print("Error occurred, closing Driver.")
+    #driver.quit()
