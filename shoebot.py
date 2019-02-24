@@ -6,12 +6,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
-<<<<<<< HEAD
 from download import download
-=======
-import urllib3
 import os
->>>>>>> 4f454527e932a80578d3b87cb4b3fea37dc91c76
 
 # Fake Headers: headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
@@ -138,8 +134,8 @@ productCode = "G27805"  #input("Input Product Code: ")
 Size = 8  #input("Input Size of Shoe: ")
 Amount = 1  #input("Input quantity of pairs: ")
 
-#try:
-Main(productCode, Size, Amount)
-#except:
-    #print("Error occurred, closing Driver.")
-    #driver.quit()
+try:
+    Main(productCode, Size, Amount)
+except:
+    print("Error occurred, closing Driver.")
+    driver.quit()
