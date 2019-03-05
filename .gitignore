@@ -1,8 +1,6 @@
 /env
 /privKey
 /testAudio
-<<<<<<< HEAD
 /__pycache__
-=======
 /debug.log
->>>>>>> 4f454527e932a80578d3b87cb4b3fea37dc91c76
+audio.mp3
