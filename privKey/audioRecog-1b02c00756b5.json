@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "audiorecog-226610",
+  "private_key_id": "1b02c00756b5ec3766997f975edadb0673410f05",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCOJ4XxKZZ2gf4t\nCIU/oFiYLHXx03v9pjatJeBi7lidaJDDBXk4OGBdVDFwMuRVj21zbFBZ/cncfrnP\nYUwLc2ifTbna5Aq+Vx6tGc/4KXC5vN1giZ0594NLPft5zGTN/K+Tmz3QS2vDB+LM\njlfbHsZMK2qEMZ9Lx0z/GuI1HVRBFZX2GFQ8v3Ep0fCf71czfmleWNWiimNTI/DM\nqCDfnk1v3Q20gVfnfzGhoMkLWlVxRgp0bGpybXbldnUwd7neoBT6Ves03Ha/CMLT\nM2yUfq72cff7NXvLaMwynXmMejj74mtgeLHcj/kZvHlfyUAiMh5IvjExqRMg2Qae\ncAzotZNNAgMBAAECggEADVxQzg4wlbBsdhZIH82V3633r+QTa6jRmFiBzHD5ly6a\nwuZvmQWDcrVVDplZ6JWNN4n4mCl7bX19QHm0+5m8CmAnYn4iAsQn0Yq/7Zat55pR\n3DiGGuQ7TNKyIT9BDv/7qI3j5pqpscm6wUSnpHD+0wd8zWWBXIGKdRE1YMFoh9O4\nEL8CxhP7eCplza8/V8ZjyFls4OndRU/r3R3gHdmGAs/Zw21GDVTfToC7cwG3nCtj\nDQBUfDT2G7IkDHv4OA+5fi+0ecHfgTs/50K2VOxY2Y6esxE290TtkUTg/U7fA1rq\nyDTulQbwQXR3JBstbrMFh1/dkTa1YqGaqZCGersSaQKBgQDFopRFfoIACiDuORD0\nyNKvtB5VJacP3hCsmzgQO7PtWvOwDfS9Kr3ABt7Uf8IdqppSjs8lAQ2TOkoKGMP6\nehtakh0SBW8bY5KoaTH+MUbKx3ImxSymZbP2i4R2C+3H2c1yFsR2hZArZFWNrMKk\nGGRJ70K3Wd17nB/b1SnV0eRo4wKBgQC4IoubwaIa63rD23IREGC77axx3GGZA9iu\ny7171F/Ic+SSGPcsF9G50Fpvz1LzjdLVuMEJAd01QDOPkuv9/8KOcGsClfxO19Bt\nMwUBerJ0zcBq4ki4UVAFuPNQtwhhaeLHYmt7z6mveA+iWFfBjFZGBxmeVrHmGLCR\ngpIrpjA6DwKBgQC2Y1iUXbCZWr+TOYTlcmPFFOOdTrdDVHts3344tPBSjsovYmHH\nJaehjHWeBB1fhW8P241dKACgK33inYJXKNMPnaJIXE1yKE1TMGmbnVwojTFSiEqx\ncVBIqe7fhhi1g9IuhMZgXthywxCVQ6cJCx2agby/OqbEiYt5M9p84kv5YwKBgBA3\nmqwhJbHRQ4K0dRtjoeFrUWDF1CKx4AelEg8x6S2yZ1Mmt74+as4+t3hZfijNOOBx\n4S5155GlEeV3PymjuPLqm8Iii5I2F7lGYQ58S/NVm7jOLTFul+mpHGTjee16ceq1\nlFnXNE6r+FSIC1KUlZSdU3hKkmh9jC+EnHMTs/OpAoGBAMRLB/30rVvI2nQFX+jy\nyQEHWTKTfXO9iWJ5/D5C/Kl3YvtX7DC5zllaysOyjyqCl0lUZmPRo8rW2nNYgg5e\nuhmJsCBaQu0cQ+gNiFyfezxi0oevGPLjZv7b8yZLvov5hXMMLhOZch4WPAio4HWC\nCPTYqS/PlTs1YZ/9Q48fZgmM\n-----END PRIVATE KEY-----\n",
+  "client_email": "darren@audiorecog-226610.iam.gserviceaccount.com",
+  "client_id": "116661324528044156577",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/darren%40audiorecog-226610.iam.gserviceaccount.com"
+}
