@@ -1,6 +1,1 @@
-/env
-/privKey
-/testAudio
-/__pycache__
-/debug.log
-audio.mp3
+/audio.mp3
